@@ -20,6 +20,9 @@ async function getSwthAddress() {
         console.log("start scan block: ", height);
         const txBlock = await zilliqa.blockchain.getTxnBodiesForTxBlock(height.toString());
         const transactions = txBlock.result;
+        if (transactions === undefined) {
+            continue;
+        }
         for (let i = 0; i < transactions.length; i ++) {
             const toAddr = toBech32Address(transactions[i].toAddr);
             if (toAddr == lockProxy && transactions[i].receipt.success) {
@@ -30,7 +33,7 @@ async function getSwthAddress() {
                             const hexAddr = e.value;
                             console.log(hexAddr);
                             const swthAddr = bech32.encode("swth", bech32.toWords(Buffer.from(hexAddr.substring(2), "hex")));
-                            fs.appendFile('address.txt', swthAddr + '\n', function (err) {
+                            fs.appendFile('address.txt', hexAddr + " " + transactions[i].ID + " " + swthAddr + '\n', function (err) {
                                 if (err) throw err;
                                 console.log('Saved!');
                               });
