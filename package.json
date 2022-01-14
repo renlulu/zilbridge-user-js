@@ -1,0 +1,12 @@
+{
+  "name": "zilbridge",
+  "version": "1.0.0",
+  "description": "To scan zilbridge users and figure out their ethereum address",
+  "main": "index.js",
+  "author": "xiaohuo200@gmail.com",
+  "license": "MIT",
+  "dependencies": {
+    "@zilliqa-js/zilliqa": "^3.3.3",
+    "bech32": "^2.0.0"
+  }
+}
